@@ -1,0 +1,80 @@
+<% layout("/layouts/boilerplate") %>
+
+  <body>
+    <div class="row no-row">
+      <div class="col-md-6 offset-md-3">
+        <h3>
+          <%= showListing.title %>
+        </h3>
+        <div class="card show-card listing-card">
+          <img src="<%= showListing.image.url %>" class="card-img-top" alt="listing-image" style="height: 20rem;">
+          <div class="card-body">
+            <p class="card-text">
+              <%= showListing.description %> <br>
+                &#8377;<%= showListing.price %> <br>
+                  <%= showListing.location %> <br>
+                    <%= showListing.country %> <br>
+                      <div class="btns">
+                        <a href="http://localhost:8080/listings/edit/<%= showListing.id %>"><button
+                            class="btn btn-update">update</button></a>
+                        <form method="POST" action="/listings/delete/<%= showListing.id %>?_method=DELETE">
+                          <button class="btn btn-update delete">delete</button>
+                        </form>
+                      </div>
+            </p>
+          </div>
+        </div>
+     
+    
+
+   
+        <hr>
+        <h5>Leave the Review</h5>
+        <form action="/listings/<%= showListing.id %>/review" method="post" novalidate class="needs-validation">
+          <div>
+            <label for="rating" class="form-label">Rating</label>
+            <input type="range" name="review[rating]" id="rating" min="1" max="5" class="form-range">
+          </div>
+
+          <div>
+            <label for="comment" class="form-label"> comment</label>
+            <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control" placeholder="enter any review to comment" required></textarea>
+            <div class="invalid-feedback">Please enter right comment/review</div>
+          </div>
+
+          <div class="mb-3 mt-3">
+          <button class="btn btn-outline-dark">Submit</button>
+        </div>
+
+        </form>
+    
+
+   
+        <hr>
+        <ul>
+          <div class="row">
+          <% for(listing of showListing.reviews){ %>
+          
+           
+            <div class="card col-md-6 mb-3 me-3" style="width: 18rem; padding: 0.3rem;">
+              <div class="card-body">
+                <h5 class="card-title">Hardy sandhu</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">
+                  <%= listing.rating %>Stars
+                </h6>
+                <p class="card-text"><%= listing.comment %>.</p>
+                <form action="/listings/<%= showListing.id %>/review/<%= listing._id %>?_method=DELETE" method="post">
+                <button class="btn btn-outline-dark btn-sm">Delete</button>
+              </form>
+              </div>
+            </div>
+      
+           <%   } %>
+          </div>
+          <!-- <li><%= showListing.comment %></li> -->
+        </ul>
+        <!-- <%= showListing.reviews %> -->
+   
+  </div>
+  </div>
+  </body>
