@@ -53,7 +53,7 @@ router.put("/edit/:id",isLogedIn,async(req,res) =>{
     await listing.findByIdAndUpdate(id,updated);
     req.flash("success","Listing is Updated");
     res.redirect("/listings");
-});
+});  
 
 router.delete("/delete/:id",isLogedIn,async(req,res) =>{
     let {id} = req.params;
