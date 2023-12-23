@@ -54,6 +54,7 @@ app.use(passport.session());
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 passport.use(new LocalStrategy(user.authenticate()));
+const a = 10;
 
 
 

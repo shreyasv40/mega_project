@@ -1,3 +1,4 @@
+const a = 10;
 const mongoose = require("mongoose");
 const listing = require("../models/listing.js");
 const review = require("../models/review.js");

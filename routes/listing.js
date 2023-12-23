@@ -16,7 +16,7 @@ router.get("/new",isLogedIn,(req,res) =>{
     res.render("./listing/new.ejs");
 });
 
-router.get("/:id",isLogedIn,async(req,res) =>{
+router.get("/:id",async(req,res) =>{
     console.log(req.user);
         let {id} = req.params;
         let showListing =await listing.findById(id).populate('reviews');

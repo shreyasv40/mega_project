@@ -1,3 +1,4 @@
+const a = 10;
 const sampleListings = [
     {
       title: "Cozy Beachfront Cottage",

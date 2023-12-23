@@ -7,7 +7,7 @@ const passport = require("passport");
 
 router.get("/signup", (req, res) => {
   res.render("./user/signup.ejs");
-});
+}); 
 
 router.post("/signup", async (req, res, next) => {
   try {

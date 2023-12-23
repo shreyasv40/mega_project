@@ -3,7 +3,6 @@ const router = express.Router({mergeParams: true});
 const listing = require("../models/listing.js");
 const review = require("../models/review.js");
 
-
 router.post("/", async (req,res) =>{
     let {id} = req.params;
     let thisListing = await listing.findById(req.params.id);

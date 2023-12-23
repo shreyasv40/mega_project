@@ -1,3 +1,4 @@
+const a = 10;
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 const passportLocalMongoose = require('passport-local-mongoose');

@@ -4,4 +4,4 @@ module.exports.isLogedIn = (req,res,next) =>{
        return res.redirect("/login");
     }
     next();
-}
+}  
