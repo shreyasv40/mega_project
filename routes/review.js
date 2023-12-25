@@ -7,6 +7,8 @@ router.post("/", async (req,res) =>{
     let {id} = req.params;
     let thisListing = await listing.findById(req.params.id);
     let newreview = await new review(req.body.review);
+    newreview.author = req.user;
+    console.log("req.user: ",req.user);
     await newreview.save();
     thisListing.reviews.push(newreview);
     await thisListing.save();

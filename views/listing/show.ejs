@@ -10,6 +10,7 @@
           <img src="<%= showListing.image.url %>" class="card-img-top" alt="listing-image" style="height: 20rem;">
           <div class="card-body">  
             <p class="card-text">
+              created By @<%= showListing.owner.username %> <br>
               <%= showListing.description %> <br>
                 &#8377;<%= showListing.price %> <br>
                   <%= showListing.location %> <br>
@@ -27,7 +28,7 @@
      
     
 
-   
+        <% if(currUser){ %>
         <hr>
         <h5>Leave the Review</h5>
         <form action="/listings/<%= showListing.id %>/review" method="post" novalidate class="needs-validation">
@@ -48,29 +49,32 @@
 
         </form>
     
+        <% } %>
 
    
         <hr>
         <ul>
-          <div class="row">
-          <% for(listing of showListing.reviews){ %>
+         
+            <div class="row">
+              <% for(listing of showListing.reviews){ %>
+              
+               
+                <div class="card col-md-6 mb-3 me-3" style="width: 18rem; padding: 0.3rem;">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= listing.author.username %></h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">
+                      <%= listing.rating %>Stars
+                    </h6>
+                    <p class="card-text"><%= listing.comment %>.</p>
+                    <form action="/listings/<%= showListing.id %>/review/<%= listing._id %>?_method=DELETE" method="post">
+                    <button class="btn btn-outline-dark btn-sm">Delete</button>
+                  </form>
+                  </div>
+                </div>
           
-           
-            <div class="card col-md-6 mb-3 me-3" style="width: 18rem; padding: 0.3rem;">
-              <div class="card-body">
-                <h5 class="card-title">Hardy sandhu</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">
-                  <%= listing.rating %>Stars
-                </h6>
-                <p class="card-text"><%= listing.comment %>.</p>
-                <form action="/listings/<%= showListing.id %>/review/<%= listing._id %>?_method=DELETE" method="post">
-                <button class="btn btn-outline-dark btn-sm">Delete</button>
-              </form>
+               <%   } %>
               </div>
-            </div>
-      
-           <%   } %>
-          </div>
+        
           <!-- <li><%= showListing.comment %></li> -->
         </ul>
         <!-- <%= showListing.reviews %> -->

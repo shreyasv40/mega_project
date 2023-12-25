@@ -12,11 +12,11 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/wonder');
 }
 
-// const init = async() =>{
-//     await listing.insertMany(initdata.data);
-//     console.log("data was inserted");
-// }
-// init();
+const init = async() =>{
+    await listing.insertMany(initdata.data);
+    console.log("data was inserted");
+}
+init();
 
 const addData = async () =>{
   // let firstli = await listing.findById("657444d1e166f9afa1a90a6a");
