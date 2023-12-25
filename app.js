@@ -10,8 +10,9 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const user = require("./models/user.js");
+const {saveUrl} = require("./middleware.js");
 
-
+ 
 
 const sessionOption = {
   secret: "mysecretstring",
