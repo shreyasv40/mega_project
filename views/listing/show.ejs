@@ -18,15 +18,14 @@
                       <div class="btns">
                         <a href="http://localhost:8080/listings/edit/<%= showListing.id %>"><button
                             class="btn btn-update">update</button></a>
-                        <form method="POST" action="/listings/delete/<%= showListing.id %>?_method=DELETE">
+                        <form method="POST" action="/listings/<%= showListing.id %>?_method=DELETE">
                           <button class="btn btn-update delete">delete</button>
                         </form>
                       </div>
             </p>
           </div>
         </div>
-     
-    
+  
 
         <% if(currUser){ %>
         <hr>

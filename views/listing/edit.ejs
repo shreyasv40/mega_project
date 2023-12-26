@@ -3,7 +3,7 @@
 <body>
    
     <h2 class="offset-3 mt-3">Edit Details</h2>
-    <form action="/listings/edit/<%= newlisting.id %>?_method=PUT" method="post" class="needs-validation"  novalidate >
+    <form action="/listings/<%= newlisting.id %>?_method=PUT" method="post" class="needs-validation"  novalidate >
         <div class="row offset-3">
             <div class="col-md-8">  
         <input type="text" name="listings[title]" id="" value="<%= newlisting.title %>" class="form-control" required><br>
