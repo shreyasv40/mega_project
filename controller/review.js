@@ -25,6 +25,7 @@ module.exports.deletedReview =  async(req,res) =>{
         return     res.redirect(`/listings/${id}`);
 
     }
+    let delreview = await review.findByIdAndDelete(reviewid);
     req.flash("success","Review is deleted successfully");
     res.redirect(`/listings/${id}`);
 }
