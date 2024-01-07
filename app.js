@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV != "production"){
+  require("dotenv").config();
+}
 const express = require("express");
 const app = express();
 const port = 8080;
@@ -6,16 +9,31 @@ const mongoose = require("mongoose");
 const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const session = require("express-session");
+const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const user = require("./models/user.js");
 const {saveUrl} = require("./middleware.js");
+const listing = require("./models/listing.js");
+const dbUrl = process.env.ATLASDB_URL;
 
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error",() =>{
+  console.log("Error in mongo session",err);
+})
 
 const sessionOption = {
-  secret: "mysecretstring",
+  store: store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
 }
@@ -32,13 +50,12 @@ app.use(methodOverride('_method'));
 app.engine("ejs",ejsMate);
 
 
-
 main()
 .then(console.log("db to connection successful"))
 .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/wonder');
+  await mongoose.connect(dbUrl);
 }
 
 app.listen(port, () =>{
@@ -55,7 +72,9 @@ app.use(passport.session());
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 passport.use(new LocalStrategy(user.authenticate()));
-const a = 10;
+
+
+
 
 
 
@@ -66,8 +85,9 @@ app.use((req,res,next) =>{
   next();
 });
 
-app.get("/", (req,res) =>{
-    res.send("root route is working");
+app.get("/", async(req,res) =>{
+  let allListing =await listing.find({});
+  res.render("./listing/index.ejs",{allListing});
 });
 
 

@@ -16,11 +16,12 @@ body{
     background-color: white;
 }
 .container-fluid{
-    /* padding: 1rem; */
     flex: 1;
-    /* background-color: red; */
-    
 }
+.mt-3{
+    margin: 2rem 2rem;
+}
+
 /* 
 .no-row{
     display: flex;
@@ -64,6 +65,13 @@ a{
     font-weight: 500;
 }
 
+.navbar-brand{
+    color: #FF385C;
+}
+
+.navbar-brand:hover{
+    color: #FF385C;
+}
 
 
 /* ----------- footer ------------ */

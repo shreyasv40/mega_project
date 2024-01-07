@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 
   <body>
-    <div class="row no-row">
-      <div class="col-md-6 offset-md-3">
+    <div class="row no-row offset-3">
+      <div class="col-md-8  mt-3">
         <h3>
           <%= showListing.title %>
         </h3>
@@ -15,6 +15,7 @@
                 &#8377;<%= showListing.price %> <br>
                   <%= showListing.location %> <br>
                     <%= showListing.country %> <br>
+                    <!-- <%= showListing.owner.username %> -->
                       <div class="btns">
                         <a href="http://localhost:8080/listings/edit/<%= showListing.id %>"><button
                             class="btn btn-update">update</button></a>
@@ -37,15 +38,15 @@
 
             <fieldset class="starability-slot" name="review[rating]">
               <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
-              <input type="radio" id="first-rate1"  name="review[rating]" name="rating" value="1" />
+              <input type="radio" id="first-rate1"  value="1"  name="review[rating]"/>
               <label for="first-rate1" title="Terrible">1 star</label>
-              <input type="radio" id="first-rate2"  name="review[rating]" name="rating"  value="2" />
+              <input type="radio" id="first-rate2"  value="2"  name="review[rating]"/>
               <label for="first-rate2" title="Not good">2 stars</label>
-              <input type="radio" id="first-rate3"  name="review[rating]" name="rating"  value="3" />
+              <input type="radio" id="first-rate3"   value="3"  name="review[rating]"/>
               <label for="first-rate3" title="Average">3 stars</label>
-              <input type="radio" id="first-rate4"  name="review[rating]" name="rating" value="4" />
+              <input type="radio" id="first-rate4"   value="4" name="review[rating]" />
               <label for="first-rate4" title="Very good">4 stars</label>
-              <input type="radio" id="first-rate5"  name="review[rating]" name="rating"  value="5" />
+              <input type="radio" id="first-rate5"   value="5"  name="review[rating]"/>
               <label for="first-rate5" title="Amazing">5 stars</label>
             </fieldset>
 
@@ -84,6 +85,7 @@
                       Rated:  <%= listing.rating %> stars
                     </p>
                     <p class="card-text"><%= listing.comment %>.</p>
+                    
                     <form action="/listings/<%= showListing.id %>/review/<%= listing._id %>?_method=DELETE" method="post">
                     <button class="btn btn-outline-dark btn-sm">Delete</button>
                   </form>

@@ -14,7 +14,6 @@ async function main() {
 
 const init = async() =>{
     await listing.insertMany(initdata.data);
-    console.log("data was inserted");
 }
 init();
 
@@ -29,7 +28,6 @@ const addData = async () =>{
   // firstli.reviews.push(newreview);
   // await newreview.save();
   // await firstli.save();
-  // console.log("both are save");
 }
 
 addData();

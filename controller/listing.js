@@ -10,7 +10,6 @@ module.exports.newListing = (req,res) =>{
 }
 
 module.exports.showListing = async(req,res) =>{
-    console.log(req.user);
         let {id} = req.params;
         let showListing =await listing.findById(id).populate({path: "reviews", populate:{path: "author"}}).populate("owner");
         if(!showListing){
@@ -23,9 +22,14 @@ module.exports.showListing = async(req,res) =>{
 }
 
 module.exports.saveListing = async(req,res) =>{
+    let url = req.file.path;
+    let filename = req.file.filename;
+
+
     let newlisting = await new listing(req.body.listing);
-    console.log(res.locals.currUser);
     newlisting.owner = res.locals.currUser;
+    newlisting.image.url = url;
+    newlisting.image.filename = filename;
     newlisting.save();
     req.flash("success","listing is added");
     res.redirect("/listings");
@@ -50,15 +54,23 @@ module.exports.editListingForm = async(req,res) =>{
 module.exports.editedListing = async(req,res) =>{
     let {id} = req.params;
     let updated = req.body.listings;
-    await listing.findByIdAndUpdate(id,updated);
+    const Listing = await listing.findByIdAndUpdate(id,updated);
+
+    let url = req.file.path;
+    let filename = req.file.filename;
+
+    if(typeof req.file !== "undefined"){
+    Listing.image.url = url;
+    Listing.image.filename = filename;
     req.flash("success","Listing is Updated");
     res.redirect("/listings");
+    Listing.save();
+    }
 }
 
 module.exports.deletedListing = async(req,res) =>{
     let {id} = req.params;
     const list = await listing.findById(id);
-    console.log("deleted listing owner:", list.owner);
     if(!list.owner.equals(res.locals.currUser._id)){
         req.flash("fail","You do not delete this listing because this is not your listing");
         return res.redirect(`/listings/${id}`);
